@@ -1,0 +1,30 @@
+aula 06 - Trabalhando com sessao
+
+06.2 ->Guardando o usuario
+Arrumar um jeito de avisar o servidor que existe um usuario logado e assim pode deixar mostrar as informações.
+1-Armazenar essa informação
+(lembre que o http é independente, Exemplo : quando eu digito login = 1 requesição e quando eu coloco listar-cursos isso é uma segunda requisição )
+Para resolver isso existe a SESSAO no http
+Vamos amarzenar essa informação na sessao para informar que tem um usuario logado
+
+
+        $_SESSION['usuario_logado'] = $usuario->getEmail();
+				ou
+	$_SESSION['logado'] = true;
+para isso funcionar preciso inicializar a session
+	session_start();
+Para inicializar a session seria ideal inicial no arquivo index porque atravez dela toda a aplicação será necessaria a ver essa verificação 
+se está logado ou não.
+//
+f12 no navegador -> application -> Cookies 
+Cookie é uma informação de texto que foi amarzenada( isso acontece toda vez que queremos mandar uma informação para o servidor)
+
+06.5 Protegendo a aplicação 
+Verificando se o indice existe em noss _SESSION 
+	if (!isset($_SESSION['logado'])) {
+	    header('Location: /login');
+	    exit();
+	}
+
+iSSO FUNCIONARA
+if (!isset($_SESSION['logado']) && $caminho !=='/login' && $caminho !=='/realiza-login')
